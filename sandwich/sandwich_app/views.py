@@ -5,9 +5,9 @@ from django.http import Http404
 
 # Create your views here.
 ingredients = {
-    'meats': ['Ham', 'Turkey', 'beef'],
-    'cheese': ['Chedder', 'pepper jack', 'fondue'],
-    'toppings': ['onions', 'pickle', 'mayo']
+    'meats': ['Ham', 'Turkey', 'Beef', 'Sasuage', 'Pepperoni', 'Bacon'],
+    'cheese': ['Chedder', 'pepper jack', 'fondue', 'american', 'mozzeralla', 'swiss'],
+    'toppings': ['onions', 'pickle', 'mayo', 'mustard', 'mushroom', 'ketchup', 'tomato', 'lettuce']
 }
 
 class SandwichAppView(View):
@@ -38,11 +38,40 @@ class SandwichGeneratorView(View):
         selected_meat = random.choice(ingredients['meats'])
         selected_cheese = random.choice(ingredients['cheese'])
         selected_toppings = random.choice(ingredients['toppings'])
-
+        sandwich_list = []
         sandwich = f'{selected_meat} & {selected_cheese} with {selected_toppings}'
+        for sandwich in range(150):
+            selected_meat = random.choice(ingredients['meats'])
+            selected_cheese = random.choice(ingredients['cheese'])
+            selected_toppings = random.choice(ingredients['toppings'])
+            if sandwich not in sandwich_list:
+                sandwich_list.append(sandwich)
         
+        print(len(sandwich_list))
+        print('testing this shit')
         return render(
             request = request,
             template_name = 'sandwich_generator.html',
             context = {'sandwich': sandwich}
+        )
+
+class SandwichMenuView(View):
+    def get(self, request):
+
+        sandwich_list = []
+
+        for _ in range(150):
+            selected_meat = random.choice(ingredients['meats'])
+            selected_cheese = random.choice(ingredients['cheese'])
+            selected_toppings = random.choice(ingredients['toppings'])
+            
+            radom_sandwich = f'{selected_meat} & {selected_cheese} with {selected_toppings}'
+
+            if radom_sandwich not in sandwich_list:
+                sandwich_list.append(radom_sandwich)
+
+        return render(
+            request = request,
+            template_name = 'sandwich_menu.html',
+            context = {'sandwich_list': sandwich_list}
         )
