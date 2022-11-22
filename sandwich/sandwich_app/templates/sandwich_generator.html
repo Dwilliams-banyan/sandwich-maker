@@ -1,3 +1,7 @@
 <h1>{{ sandwich|title }}</h1>
 
 <p>Keep refreshing the page for a new sandwich!</p>
+
+<form action="{% url 'sandwich_menu' %}">
+    <input type="submit" value="To Sandwich Menu" />
+</form>

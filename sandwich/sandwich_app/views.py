@@ -38,17 +38,8 @@ class SandwichGeneratorView(View):
         selected_meat = random.choice(ingredients['meats'])
         selected_cheese = random.choice(ingredients['cheese'])
         selected_toppings = random.choice(ingredients['toppings'])
-        sandwich_list = []
         sandwich = f'{selected_meat} & {selected_cheese} with {selected_toppings}'
-        for sandwich in range(150):
-            selected_meat = random.choice(ingredients['meats'])
-            selected_cheese = random.choice(ingredients['cheese'])
-            selected_toppings = random.choice(ingredients['toppings'])
-            if sandwich not in sandwich_list:
-                sandwich_list.append(sandwich)
         
-        print(len(sandwich_list))
-        print('testing this shit')
         return render(
             request = request,
             template_name = 'sandwich_generator.html',
@@ -64,7 +55,7 @@ class SandwichMenuView(View):
             selected_meat = random.choice(ingredients['meats'])
             selected_cheese = random.choice(ingredients['cheese'])
             selected_toppings = random.choice(ingredients['toppings'])
-            
+
             radom_sandwich = f'{selected_meat} & {selected_cheese} with {selected_toppings}'
 
             if radom_sandwich not in sandwich_list:
